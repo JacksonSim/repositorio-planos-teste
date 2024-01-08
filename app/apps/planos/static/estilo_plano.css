@@ -1,0 +1,265 @@
+.all_tipo_portifolio {
+    padding: 10px 0;
+}
+
+.tipo_portifolio {
+    /* border-bottom: 2px solid #ff7021; */
+    padding: 5px 0px;
+    margin: 5px 20px;
+    color: #616265;
+    font-weight: 600;
+    cursor: pointer;
+    
+}
+.container-fluid{
+    /* min-width: 1450px !important; */
+    max-width: 1450px !important;
+}
+/* Adicione estilos conforme necessário */
+.tipo_portifolio.destaque {
+    border-bottom: 2px solid #ff7021; /* Cor do destaque */
+    padding: 5px 0px;
+    color: #ff7021;
+}
+
+.bloco_destaque {
+    background-color: #ff7021;
+    line-height: 40px;
+    color: #fff;
+    border-radius: 20px;
+    max-width: 230px;
+    margin: 0 auto;
+
+    position: relative;
+    bottom: -20px;  
+    visibility: hidden;
+    font-weight: 500;
+}
+
+.bloco_plano_completo {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #616265;
+    font-size: 12pt;
+    transition: transform 1s ease;
+    min-width: 350px;
+    display: none;
+}
+.bloco_plano_completo.mostrar {
+    display: block;
+}
+
+.bloco_plano_completo:hover {
+    transform: scale(1.06);
+    transition-duration: 600ms;
+}
+
+.ocultar_bloco {
+    visibility: hidden;
+    
+}
+
+.reduzir_bloco {
+    height: 0;
+}
+
+.bloco_plano {
+    padding-top: 30px;
+    border: 1px solid #616265;
+    border-radius: 4px;
+    max-width: 350px !important;
+}
+
+.plano_nome {
+    color: #77797c;
+    font-weight:700;
+    font-size: 18pt;
+}
+
+.combobox {
+    background-color: #EFEFF0;
+    border-radius: 20px;
+    max-width: 260px;
+    margin: 15 auto;
+    padding: 0 15px;
+    text-align: center;
+    border: 0px;
+} 
+
+.combobox:focus {
+    box-shadow:0px 0px 10px 1px #ff6f2180;
+}
+
+.bloco_valores {
+    max-width: 260px;
+    margin: 15 auto;
+    font-size: 10pt;
+}
+
+.valor_sem_destaque {
+    text-decoration: line-through;
+    font-size: 11pt;
+}
+
+.valor_com_destaque {
+    color: #ff7021;
+    font-size:18pt ;
+    font-weight: 700;
+}
+
+.valor_com_destaque > span {
+    font-size: 35pt;
+}
+
+.btn-primary {
+    width: 260px;
+    background-color: #ff7021;
+    border: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #c94f0d;
+    border-color: #ff7021;
+}
+
+.btn-primary:focus {
+    box-shadow:none !important;
+    border-color: #ff7021 !important;
+    outline: none !important;
+}
+
+.btn-primary:active,
+.btn-primary.active{
+    background-color: #c74600 !important;
+}
+
+.plano_top {
+    border-bottom: #77797c solid 2px;
+    width: 310px;
+    margin: 0px auto;
+    padding: 0 25px 30px 25px;
+}
+
+.plano_botton {
+    background-color: #EFEFF0;
+    text-align: left;
+    border-radius: 0 0px 4px 4px;
+    padding: 20px 0px;
+}
+
+.texto_hifen {
+
+    word-wrap: break-word !important;
+    text-align: left !important;
+    overflow-wrap: break-word !important;
+    -ms-word-break: break-all !important;
+    word-break: break-word !important;
+}
+.icon_itens_combo {
+    height: auto;
+    width: auto;
+    margin: auto;
+}
+
+.taxa_up_down{
+    max-width: 310px;
+    margin: 0px auto 20px auto;
+}
+
+.all_icon_itens_combo {
+    max-width: 310px;
+    margin: 0px auto 20px auto;    
+}
+
+.img_icon_itens_combo {
+    height: 30px;
+    width: 30px;
+    margin: 5px 5px;
+}
+
+
+
+.destacar > div:nth-child(1) {
+    visibility: visible;
+}
+@keyframes changeBoxShadow {
+    0% {
+        box-shadow: 0px 0px 12px 1px #ff702180;
+    }
+    30% {
+        box-shadow: 0px 0px 2px 1px #ff702180;
+    }
+    50% {
+        box-shadow: 0px 0px 15px 2px #ff702180;
+    }
+    70% {
+        box-shadow: 0px 0px 2px 1px #ff702180;
+    }
+    100% {
+        box-shadow: 0px 0px 12px 1px #ff702180;
+    }
+}
+.destacar > div:nth-child(2) {
+    border: solid #ff7021 1px;
+    animation: changeBoxShadow 5s infinite;
+}
+
+.destacar > div:nth-child(2) > div:nth-child(1) > .combobox {
+    background-color: #FFF1E9;
+    color: #ff7021;
+}
+.destacar > div:nth-child(2) > div:nth-child(1) > .combobox:focus {
+    background-color: #ffffff;
+}
+
+.destacar > div:nth-child(2) > div:nth-child(2) {
+    background-color: #FFF1E9;
+}
+
+.form-control option {
+    background-color: #fff;
+    color: #77797c; 
+    
+}
+
+.destacar > div:nth-child(2) > div:nth-child(1) > .combobox option {
+    background-color: #fff;
+    color: #ff7021; 
+}
+
+
+.all_icon_itens_combo2 {
+    max-width: 310px;
+    margin: 20px auto;
+}
+
+.img_icon_itens_combo2 {
+    height: 30px;
+    width: 30px;
+    margin: 5px 10px 5px 0px;
+}
+
+.Lista_Itens {
+    display: flex;
+    align-items: center;
+    width: 310px;
+}
+
+.Title_Icon {
+    flex-grow: 1;
+    max-width: 100%;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.expandir-icon {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.Detalhes_Item {
+    padding: 10px 10px 10px 10px;
+}
+

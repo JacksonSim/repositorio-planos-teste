@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Planos Disponíveis{% endblock title %}
+{% block extracss %}
+{% endblock extracss %}
+{% block breadcrumb %}
+  <div>
+      <h1><i class="fa fa-calendar"></i> Planos</h1>
+      <p>Planos disponibilisados pela sim internet</p>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">Planos</a></li>
+  </ul>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+
+    <form method="post" action="{% url 'home' %}" class="card">
+        <div class="card-header">
+            <h6 class="mb-0">Selecione uma Cidade</h6>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            {{ form }}
+        </div>
+        <button type="submit" class="btn btn-outline-warning px-5">Ver Planos</button>
+    </form>
+
+
+    {% if selected_city %}
+        <h2>Planos Disponíveis para {{ selected_city.nome }}</h2>
+        <!-- Adicione o código para exibir os planos disponíveis para a cidade selecionada -->
+    {% endif %}
+
+
+{% endblock content %}

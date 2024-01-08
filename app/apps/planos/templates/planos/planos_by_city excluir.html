@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Planos Disponíveis em {{ city.cdd_nome }}{% endblock title %}
+{% block extracss %}
+{% endblock extracss %}
+{% block breadcrumb %}
+<div>
+  <h1><i class="fa fa-calendar"></i> Planos</h1>
+  <p>Planos disponibilisados pela sim internet</p>
+</div>
+<ul class="app-breadcrumb breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+  <li class="breadcrumb-item"><a href="#">Planos</a></li>
+</ul>
+{% endblock breadcrumb %}
+{% block content %}
+
+<h1>Planos Disponíveis em {{ city.cdd_nome }}</h1>
+<br><br>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
+
+  {% for plano in planos %}
+  {% if plano.plan_ativo == 1 %}
+    <div class="col">
+      <div class="card product-card">
+        <div class="card-body" style="align-items:center;">
+          <h5 class="card-title">{{ plano.plan_nome }}</h5>
+          {% if plano.plan_combo == 1 %}
+          {% for item in plano.itens %}
+          <p class="card-text">{{ item.item_nome }}</p>
+          <p class="card-text">{{ item.item_detalhe }}</p>
+          {% endfor %}
+          {% endif %}
+          <div class="d-flex align-items-center">
+            <span class="me-1 text-decoration-line-through">De R$ {{ plano.plan_valor|floatformat:2 }}</span>
+            {% for acordo in plano.acordos %}
+            {% if acordo.acor_fid.fid_qtdemeses == 12 %}
+            <span class="fs-5">Por: R$ {{ acordo.acor_valor|floatformat:2 }}</span>
+            <span class="fs-9">economize: R$ {{ acordo.economia|floatformat:2 }}</span class="fs-5">
+            
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="product-action mt-2">
+            <div class="d-grid">
+              <a href="#" class="btn btn-outline-warning px-5">Contratar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}
+
+</div>
+
+{% endblock content %}

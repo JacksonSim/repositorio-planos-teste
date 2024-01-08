@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% comment %} {% load utils.tamplatestags.formata_valor %} {% endcomment %}
+{% comment %} {% load humanize %} {% endcomment %}
+{% load l10n %}
+{% block title %}Planos Disponíveis em {{ city.cdd_nome }}{% endblock title %}
+{% block extracss %}
+{% endblock extracss %}
+
+{% block content %}
+<div class="grid_portifolio geral container-fluid">
+
+    <div class="all_tipo_portifolio geral d-flex justify-content-center">
+        <div class="group_blocks row ">
+            <!-- UM LOOP PARA IDENTIFICAR TODOS OS TIPOS DE CLIENTES -->
+            <div class="tipo_portifolio geral col-xs-6 destaque" data-group="Residencial" onclick="destacar(this)">Residencial</div>
+            <div class="tipo_portifolio geral col-xs-6" data-group="Corporativo" onclick="destacar(this)">Corporativo</div>
+        </div>
+
+    </div>
+
+    <div class="bloco_all_planos geral row d-flex justify-content-center">
+    {% for plano in planos %}
+    {% if plano.ativo %}
+        <!-- SE RESIDENCIAL INCLUIR A CLASSE mostrar  -->
+        <div class="bloco_plano_completo geral col-md-3 col-sm-6 col-xs-12 {% if plano.destacar_plano %}destacar{% endif %} {% if plano.tipo_cliente == 'Residencial' %}mostrar{% endif %}" data-tipo_portifolio="{{plano.tipo_cliente}}">
+            <div class="bloco_destaque geral ">
+                {{plano.text_destaque}}
+            </div>
+
+            <div class="bloco_plano geral">
+                <!-- PARTE SUPERIOR DO BLOCO DO PLANO -->
+                <div class="plano_top">
+                    <div class="plano_nome">
+                        {{plano.nome}}
+                    </div>
+
+                    <!-- SCRIPT PARA MONTAR O VALOR QTDE MESES E TEXTO DAS OPÇÕES DO SELECT LIST  -->
+                    <select class="form-control combobox" id="{{plano.id}}">
+                        <option data-acordo="{{plano.valor}}" data-fid="0">Sem fidelidade</option>
+
+                        {% for acordo in plano.acordos %}
+                        {% if acordo.ativo %}
+                        <option {% if acordo.padrao %}selected{% endif %} data-acordo="{{acordo.valor}}" data-fid="{{acordo.fidelidade.quantidade_meses}}">Fidelidade {{acordo.fidelidade.quantidade_meses}} Meses</option>
+                        {% endif %}
+                        {% endfor %}
+                        {% comment %} <option data-acordo="299" data-fid="0">Sem fidelidade</option>
+                        <option selected data-acordo="129" data-fid="12">Fidelidade 12 Meses</option>
+                        <option data-acordo="119" data-fid="24">Fidelidade 24 Meses</option>
+                        <option data-acordo="99" data-fid="36">Fidelidade 36 Meses</option> {% endcomment %}
+                    </select>
+
+                    <div class="bloco_valores">
+                        <div class="valor_sem_destaque inf_adicionais" data-id="{{plano.id}}">de R$ {{plano.valor|floatformat:2|localize}}</div>
+
+                        <div class="valor_com_destaque" data-id="{{plano.id}}">R$<span>{{plano.acor_padrao.valor|floatformat:2|localize}}</span>/mês*</div>
+
+                        {% for acordo in plano.acordos %}
+                        {% if acordo.padrao and acordo.ativo %}
+                        <div class="inf_adicionais inf_economize" data-id="{{plano.id}}">*<b>Economize R$ {{ acordo.economia|floatformat:2|localize}}</b> no final
+                            dos {{plano.acor_padrao.fidelidade.quantidade_meses}} Meses de Fidelidade.
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">
+                        Contratar
+                    </button>
+
+                </div>
+
+                <!-- PARTE INFERIOR DO BLOCO DO PLANO -->
+                <div class="plano_botton">
+                    <div style="width: 310px; margin: 0 auto;">
+                        <div class="taxa_up_down">
+                            <div><b>Download até {{plano.taxa_down}}Mbps</b></div>
+                            <div>Upload até {{plano.taxa_up}}Mbps</div>
+                        </div>
+                        {% if plano.combo %}
+                        <div class="bloco_itens_combo">
+                            <div class="d-flex justify-content-center">
+                                {% for item in plano.itens.all %}
+                                <div class="all_icon_itens_combo row collapse show">
+                                    <div class="icon_itens_combo"><img class="img_icon_itens_combo" title="{{item.nome}}"
+                                            src="{{item.icone}}">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div>
+                                <div class="Lista_Itens">
+                                    <div class="Title_Icon">
+                                        <span>Ver detalhes</span>
+                                    </div>
+                                    <div class="expandir-icon expandir-lista" data-bs-toggle="collapse" data-bs-target="#itensLista_{{plano.id}}">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </div>
+                            </div>
+                            {% for item in plano.itens.all %}
+                            
+                            <div class="justify-content-left collapse" id="itensLista_{{plano.id}}">
+                                <div class="Lista_Itens">
+                                    <div class="icon_itens_combo2"><img class="img_icon_itens_combo2" title="{{item.nome}}"
+                                        src="{{item.icone}}">
+                                    </div>
+                                    <div class="Title_Icon">
+                                        <span>{{item.nome}}</span>
+                                    </div>
+                                    <div class="expandir-icon" data-bs-toggle="collapse" data-bs-target="#{{plano.id}}_{{item.id}}">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </div>
+
+                                <div id="{{plano.id}}_{{item.id}}" class="collapse ">
+                                    <div class="Detalhes_Item texto_hifen">
+                                        {{item.detalhe}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
+
